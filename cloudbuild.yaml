@@ -13,7 +13,7 @@ steps:
 
   # Setup gcloud and kubectl context
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['container', 'clusters', 'get-credentials', 'private-cluster1', '--zone', 'asia-south2-a', '--project', 'project-7989']
+    args: ['container', 'clusters', 'get-credentials', 'private-cluster1', '--zone', 'asia-south2', '--project', 'project-7989']
 
   # Deploy to Kubernetes
   - name: 'gcr.io/cloud-builders/kubectl'
