@@ -18,7 +18,11 @@ steps:
   # Deploy to Kubernetes
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply', '-f', 'k8s/']
-    id: Deploy to Kubernetes
+    id: Deploy_to_kubernetes
+    env:
+      - 'CLOUDSDK_COMPUTE_REGION=asia-south2'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=private-cluster1'
+      - 'KUBECTL_VERSION=1.29'
 
   # Wait for 20 minutes
   - name: 'ubuntu'
