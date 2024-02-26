@@ -201,6 +201,23 @@ resource "google_container_cluster" "private_cluster" {
 
 # Note: Adjust the secondary IP range names according to your VPC and subnet setup.
 
+resource "google_compute_firewall" "allow_cloudbuild_private_access" {
+  name    = "allow-cloudbuild-private-access"
+  project = var.project_id
+  network = google_compute_network.vpc.name
+
+  allow {
+    protocol = "tcp"
+    ports    = ["443", "8443"]
+  }
+
+  direction    = "INGRESS"
+  priority     = 1000
+  source_ranges = ["10.0.2.0/24"]
+
+  // Optionally, you can add a description for this firewall rule
+  description = "Allow Cloud Build private pool access on ports 443 and 8443"
+}
 
 
 
