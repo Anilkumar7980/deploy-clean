@@ -35,6 +35,10 @@ steps:
   - name: 'hashicorp/terraform:latest'
     args: ['destroy', '-auto-approve']
 
+options:
+  pool:
+    name: projects/project-7989/locations/asia-south2/workerPools/my-private-pool    
+
 
 options:
   logging: CLOUD_LOGGING_ONLY
