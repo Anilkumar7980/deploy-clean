@@ -1,0 +1,27 @@
+steps:
+  # Terraform Init
+  - name: 'hashicorp/terraform:latest'
+    args: ['init']
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=asia-south2-a'
+
+  # Terraform Plan
+  - name: 'hashicorp/terraform:latest'
+    args: ['plan']
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=asia-south2-a'
+
+  # Terraform Apply
+  - name: 'hashicorp/terraform:latest'
+    args: ['apply', '-auto-approve']
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=asia-south2-a'
+
+  # Deploy to Kubernetes
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args: ['apply', '-f', 'k8s/']
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=asia-south2-a'
+    id: Deploy to Kubernetes
+
+timeout: '1200s' # Adjust the timeout according to your needs
