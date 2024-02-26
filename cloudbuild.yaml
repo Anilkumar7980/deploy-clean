@@ -20,7 +20,17 @@ steps:
     args: ['apply', '-f', 'k8s/']
     id: Deploy to Kubernetes
 
-timeout: '1200s'
+  # Wait for 20 minutes
+  - name: 'ubuntu'
+    entrypoint: '/bin/bash'
+    args:
+      - '-c'
+      - 'sleep 1200' # 20 minutes in seconds
+
+  # Terraform Destroy
+  - name: 'hashicorp/terraform:latest'
+    args: ['destroy', '-auto-approve']
+
 
 options:
   logging: CLOUD_LOGGING_ONLY
